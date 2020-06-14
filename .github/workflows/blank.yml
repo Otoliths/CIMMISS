@@ -17,9 +17,6 @@ jobs:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
-          run: |
-          Rscript -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-          sudo -s eval "$sysreqs"
+      - uses: r-lib/actions/setup-pandoc@master
       - name: 'Get CIMMISS'
         run: bash ./code.sh
