@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+--no-save
 ## R
 # on Ubuntu
 ## on  Ubuntu, launch R and run these commands in R
