@@ -1,5 +1,5 @@
 install.packages("jsonlite",dependencies=TRUE)
-nstall.packages("curl",dependencies = TRUE)
+install.packages("curl",dependencies = TRUE)
 baseurl <- function()"http://api.data.cma.cn:8090/api?"
 userId <- "5921014329184DMzs"
 pwd <- "O6Ex76U"
