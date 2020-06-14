@@ -25,6 +25,4 @@ jobs:
         uses: Otoliths/CIMMISS@master
         with:
            args: delete -r / && upload -r ./data//
-           secretId: ${{CIMMISS}}
-           secretKey: ${{12345678}}
-           region: ap-shanghai
+           cimmiss: ${{secrets.CIMMISS}}
