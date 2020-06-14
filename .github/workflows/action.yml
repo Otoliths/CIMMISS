@@ -17,9 +17,7 @@ jobs:
       - name: install dependencies
         run: sudo apt-get install libcurl4-openssl-dev
       - name: 'Get CIMMISS'
-        run: Rscript -e 'source("code.R")'
-        env:
-            GITHUB_TOKEN: ${{ secrets.FISHBASE }}
+        run: Rscript -e 'source("code.R")
 
       - name: Push to master
         uses: tcitry/push-to-master@v1.0
