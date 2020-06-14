@@ -14,8 +14,6 @@ jobs:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
-      - name: Install system dependencies
-        run: Rscript -e "install.packages("curl",dependencies = TRUE)"
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
       - name: Pushes to another repository
