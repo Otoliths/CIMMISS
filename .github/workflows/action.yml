@@ -21,3 +21,11 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
+      -name: Upload COS
+       uses: Otoliths/CIMMISS@master
+           with:
+           args: delete -r / && upload -r ./data//
+           secretId: ${{ secrets.CIMMISS}}
+           secretKey: ${{ secrets.12345678}}
+           bucket: ${{ secrets.BUCKET }}
+           region: ap-shanghai
