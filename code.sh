@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 ## R
-# on Ubuntu
 ## on  Ubuntu, launch R and run these commands in R
 # launch R
+R
 if(!("jsonlite" %in% row.names(installed.packages())))
   install.packages("jsonlite")
 baseurl <- function()"http://api.data.cma.cn:8090/api?"
