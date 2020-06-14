@@ -18,12 +18,7 @@ jobs:
         run: sudo apt-get install libcurl4-openssl-dev
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
-      - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@master
+      - name: Push new files back to master
+      - uses: mikeal/publish-to-github-action@master
         env:
-          FISHBASE: ${{ secrets.FISHBASE }}
-        with:
-          source-directory: 'data'
-          destination-github-username: 'Otoliths'
-          destination-repository-name: 'CIMMISS'
-          user-email: ly_ding@126.com
+           FISHBASE: ${{ secrets.FISHBASE }}
