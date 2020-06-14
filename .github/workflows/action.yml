@@ -2,11 +2,11 @@ name: test
 
 on:
   schedule:
-  - cron: "* * * * *"
+  - cron: "10 * * * *"
 
 jobs:
   bot:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     steps:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
