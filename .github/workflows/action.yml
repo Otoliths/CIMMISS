@@ -21,6 +21,6 @@ jobs:
 
       - name: Push to master
         #6e76868be6e92a8b2e79e3591856680ac076f497
-        uses: actions/bin/filter@b2bea0749eed6beb495a8fa194c071847af60ea1
-        
-      -  uses: tcitry/push-to-master@v1.0
+        uses: tcitry/push-to-master@v1.0
+        with:
+         GITHUB_TOKEN: ${{ secrets.FISHBASE }}
