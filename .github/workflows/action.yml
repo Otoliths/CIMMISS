@@ -20,6 +20,7 @@ jobs:
         run: Rscript -e 'source("code.R")'
 
       - name: Push to master
-        uses: actions/bin/filter@6e76868be6e92a8b2e79e3591856680ac076f497
+        #6e76868be6e92a8b2e79e3591856680ac076f497
+        uses: actions/bin/filter@b2bea0749eed6beb495a8fa194c071847af60ea1
         
       -  uses: tcitry/push-to-master@v1.0
