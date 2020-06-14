@@ -21,8 +21,3 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
-      - name: Upload COS
-        uses: Otoliths/CIMMISS@master
-        with:
-           args: delete -r / && upload -r ./data//
-           cimmiss: ${{secrets.CIMMISS}}
