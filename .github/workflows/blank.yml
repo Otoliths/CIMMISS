@@ -17,4 +17,4 @@ jobs:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - name: 'Get CIMMISS'
-        run: Rscript code.r
+        run: bash ./code.sh
