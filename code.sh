@@ -3,6 +3,10 @@ set -e
 ## R
 ## on  Ubuntu, launch R and run these commands in R
 # launch R
+start() {
+        /Users/runner/runners/2.263.0/work/_temp/Library  --no-save
+}
+
 R
 if(!("jsonlite" %in% row.names(installed.packages())))
   install.packages("jsonlite")
