@@ -19,6 +19,6 @@ jobs:
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
       - name: Push new files back to master
-        uses: mikeal/publish-to-github-action@master
+        uses: mikeal/publish-to-github-action@master data
         env:
           GITHUB_TOKEN: ${{ secrets.FISHBASE }}
