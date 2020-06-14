@@ -9,11 +9,19 @@ on:
 
 jobs:
   bot:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     steps:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          Rscript -e "remotes::install_github('r-hub/sysreqs')"
+          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          sudo -s eval "$sysreqs"
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
       - name: Pushes to another repository
