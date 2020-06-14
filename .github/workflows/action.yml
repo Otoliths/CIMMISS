@@ -21,4 +21,4 @@ jobs:
       - name: Push new files back to master
         uses: mikeal/publish-to-github-action@master
         env:
-          FISHBASE: ${{ secrets.FISHBASE }}
+          GITHUB_TOKEN: ${{ secrets.FISHBASE }}
