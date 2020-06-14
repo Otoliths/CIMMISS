@@ -13,7 +13,12 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
-      - name: Push to master
-      - uses: mikeal/publish-to-github-action@master
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@master
         env:
-           FISHBASE: ${{ secrets.FISHBASE }}
+          FISHBASE: ${{ secrets.FISHBASE }}
+        with:
+          source-directory: 'data'
+          destination-github-username: 'Otoliths'
+          destination-repository-name: 'CIMMISS'
+          user-email: ly_ding@126.com
