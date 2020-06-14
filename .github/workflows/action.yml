@@ -21,7 +21,3 @@ jobs:
 
       - name: Push to master
         uses: tcitry/push-to-master@v1.0
-        with:
-            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        env:
-            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
