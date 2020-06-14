@@ -14,6 +14,8 @@ jobs:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
+      - name: install dependencies
+        run: sudo apt-get install libcurl4-openssl-dev
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
       - name: Pushes to another repository
