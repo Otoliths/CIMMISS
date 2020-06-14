@@ -5,12 +5,12 @@ on:
     branches:
       - master
     schedule:
-      - cron: '0/1 0 * * *'
+      - cron: '* * * * *'
   pull_request:
     branches:
       - master
     schedule:
-      - cron: '0/1 0 * * *'
+      - cron: '* * * * *'
 
 jobs:
   bot:
@@ -20,4 +20,4 @@ jobs:
         uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
       - name: 'Get CIMMISS'
-        run: Rscript -e 'source("code.R")'
+        run: * * * * * Rscript -e 'source("code.R")'
