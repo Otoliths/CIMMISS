@@ -21,3 +21,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
+        target_repo_url:
+            git@github.com:Otoliths/CIMMISS.git
+          ssh_private_key:
+            ${{ secrets.CIMMISS }}
