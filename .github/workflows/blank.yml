@@ -12,11 +12,10 @@ on:
 
 jobs:
   bot:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     steps:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
-      - uses: r-lib/actions/setup-pandoc@master
       - name: 'Get CIMMISS'
         run: bash ./code.sh
