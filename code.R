@@ -1,5 +1,5 @@
 if(!("jsonlite" %in% row.names(installed.packages())))
-  install.packages("jsonlite")
+  install.packages("jsonlite",dependencies=TRUE)
 baseurl <- function()"http://api.data.cma.cn:8090/api?"
 userId <- "5921014329184DMzs"
 pwd <- "O6Ex76U"
