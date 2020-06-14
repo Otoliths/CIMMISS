@@ -26,5 +26,3 @@ jobs:
         with:
         target_repo_url:
             git@github.com:Otoliths/CIMMISS.git
-          ssh_private_key:
-            ${{ secrets.CIMMISS }}
