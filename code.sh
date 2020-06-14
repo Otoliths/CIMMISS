@@ -1,15 +1,10 @@
 #!/bin/bash
 set -e
-## R
-## on  Ubuntu, launch R and run these commands in R
-# launch R
-start() {
-        /Users/runner/runners/2.263.0/work/_temp/Library  --no-save
-}
 
+
+# launch R
 R
-if(!("jsonlite" %in% row.names(installed.packages())))
-  install.packages("jsonlite")
+install.packages("jsonlite")
 baseurl <- function()"http://api.data.cma.cn:8090/api?"
 userId <- "5921014329184DMzs"
 pwd <- "O6Ex76U"
