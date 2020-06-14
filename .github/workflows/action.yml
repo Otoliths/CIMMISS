@@ -13,3 +13,5 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
+      - name: Push to master
+        uses: tcitry/push-to-master@v1.0
