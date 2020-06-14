@@ -9,11 +9,13 @@ on:
 
 jobs:
   bot:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     steps:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
+        with:
+            r-version: ${{ 3.6 }}
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
       - name: Pushes to another repository
