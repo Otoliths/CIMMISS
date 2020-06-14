@@ -14,17 +14,8 @@ jobs:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
-      - uses: r-lib/actions/setup-pandoc@master
-      - name: Query dependencies
-        run: |
-          install.packages('remotes')
       - name: Install system dependencies
-        env:
-          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
-        run: |
-          Rscript -e "remotes::install_github('r-hub/sysreqs')"
-          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
-          sudo -s eval "$sysreqs"
+        run: Rscript -e "install.packages("curl",dependencies = TRUE)"
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
       - name: Pushes to another repository
