@@ -17,7 +17,5 @@ jobs:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
-      - name: 'install r'
-        run: sudo apt-get install r-base
       - name: 'Get CIMMISS'
-        run: Rscript code.r
+        run: Rscript -e code.r
