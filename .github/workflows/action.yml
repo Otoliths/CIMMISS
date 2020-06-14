@@ -1,14 +1,6 @@
 name: R-CMD-check
 
 on:
-  push:
-    branches:
-      - master
-    schedule:
-      - cron: '* * * * *'
-  pull_request:
-    branches:
-      - master
     schedule:
       - cron: '* * * * *'
 
