@@ -13,16 +13,3 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: 'Get CIMMISS'
         run: Rscript -e 'source("code.R")'
-      - name: Build
-        run: |
-            mkdir build && mkdir logdir && cd build
-            cmake .. >> ../logdir/cmake.log
-            make -j2 >> ../logdir/make.log
-            ./build/github_action >> ./logdir/test.txt
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2
-        with:
-        # Artifact name
-           name: test
-        # A file, directory or wildcard pattern that describes what to upload
-           path: ./logdir
