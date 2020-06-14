@@ -2,9 +2,7 @@
 set -e
 ## R
 # on Ubuntu
-sudo apt-get update
-sudo apt-get install r-base
-sudo apt-get install r-base-dev
+
 
 ## on  Ubuntu, launch R and run these commands in R
 # launch R
