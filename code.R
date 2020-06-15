@@ -1,4 +1,4 @@
-write.table(cars, "data.csv", append = T, row.names = F, sep=";", col.names = F)
+write.table(cars, "data/data.csv", append = T, row.names = F, sep=";", col.names = F)
 install.packages("curl")
 install.packages("httr")
 install.packages("jsonlite",dependencies=TRUE)
