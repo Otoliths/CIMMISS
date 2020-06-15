@@ -23,9 +23,9 @@ jobs:
         #uses: mikeal/publish-to-github-action@master
         uses: tcitry/push-to-master@v1.0
         env:
-          TOKEN: ${{ secrets.FISHERIES_AND_FISH }}
-        #env:
-        #  GITHUB_TOKEN: ${{ secrets.FISHBASE }}
+          TOKEN: ${{secrets.FISHERIES_AND_FISH}}
+        with:
+          GITHUB_TOKEN: ${{secrets.FISHERIES_AND_FISH}}
         #6e76868be6e92a8b2e79e3591856680ac076f497
         
         #with:
