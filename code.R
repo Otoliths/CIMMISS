@@ -13,6 +13,7 @@ url = paste(baseurl(), "userId=", userId, "&pwd=",pwd,"&dataFormat=json&interfac
             timeRange,"&staIDs=",staIDs,"&elements=",elements,sep = "")
 db <- jsonlite::fromJSON(url, flatten=TRUE)
 if(db$returnMessage == "Query Succeed"){
-  path <- paste0(Sys.time(),".rds")
-  saveRDS(db,path)
+            dir.create(Sys.Date())
+            path <- paste0(Sys.Date(),"/",Sys.time(),".rds")
+            saveRDS(db,path)
 }
