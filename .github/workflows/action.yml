@@ -16,6 +16,8 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: install dependencies
         run: sudo apt-get install libcurl4-openssl-dev
+        env:
+         R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       #- name: 'Get CIMMISS'
       #  run: Rscript -e 'source("code.R")'
       - name: 'Working'
