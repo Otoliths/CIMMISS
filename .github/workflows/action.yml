@@ -24,8 +24,8 @@ jobs:
         run: bash ./main.sh
       - name: Commit files
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "ly_ding@126.com"
+          git config --local user.name "Liuyong Ding"
           git add -A
           git commit -m "add CIMMISS" -a
       - name: 'Push changes'
