@@ -20,11 +20,14 @@ jobs:
         run: Rscript -e 'source("code.R")'
 
       - name: Push to master
-        uses: mikeal/publish-to-github-action@master
+        #uses: mikeal/publish-to-github-action@master
+        uses: tcitry/push-to-master@v1.0
         env:
-          GITHUB_TOKEN: ${{ secrets.FISHBASE }}
+           TOKEN: ${{ secrets.FISHBASE }}
+        #env:
+        #  GITHUB_TOKEN: ${{ secrets.FISHBASE }}
         #6e76868be6e92a8b2e79e3591856680ac076f497
-        #uses: tcitry/push-to-master@v1.0
+        
         #with:
          #entrypoint: 'source("code.R")'
          #args: "data"
