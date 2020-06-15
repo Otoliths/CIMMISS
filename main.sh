@@ -1,3 +1,3 @@
 #!/bin/bash
 set -eux
-R ./code.r
+Rscript -e 'source("code.R")'
