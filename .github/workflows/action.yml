@@ -24,8 +24,8 @@ jobs:
         run: |
           git config --local user.email "ly_ding@126.com"
           git config --local user.name "Otoliths"
-          git add -A
-          git commit -m "update" -a
+          git add --all
+          git commit -m "update"
       - name: 'Push changes'
         uses: ad-m/github-push-action@master
         with:
