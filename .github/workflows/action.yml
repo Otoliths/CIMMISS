@@ -20,22 +20,20 @@ jobs:
       #  run: Rscript -e 'source("code.R")'
       - name: 'Working'
         run: bash ./main.sh
-      - name: Commit files
-        run: |
-          git config --local user.email ly_ding@126.com
-          git config --local user.name Otoliths
-          git add .
-          git commit -m "update" -a
+      #- name: Commit files
+      #  run: |
+      #    git config --local user.email ly_ding@126.com
+       #   git config --local user.name Otoliths
+       #   git add .
+       #   git commit -m "update" -a
       - name: 'Push changes'
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.FISHERIES_AND_FISH }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Create a Release'
         uses: elgohr/Github-Release-Action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.FISHERIES_AND_FISH }}
         with:
-          args: CIMMISS
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       #- name: Push to master
         #uses: mikeal/publish-to-github-action@master
         #uses: tcitry/push-to-master@v1.0
