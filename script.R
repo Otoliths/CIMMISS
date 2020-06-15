@@ -25,6 +25,7 @@ get <- function(i){
   }
 }
 cat(sprintf("last Update: %s",Sys.time()),sep = "\n")
+ids <- read.csv("China_SURF_Station.csv")
 pbmcapply::pbmclapply(1:dim(ids)[1],get,mc.cores = 2)
 cat(length(list.files(paste0("data/",Sys.Date()-2,"/"), full.names = TRUE)))
 
