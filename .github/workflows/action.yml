@@ -20,20 +20,24 @@ jobs:
       #  run: Rscript -e 'source("code.R")'
       - name: 'Working'
         run: bash ./main.sh
+      - name: Commit results
+        run: |
+          git commit 2020-06-16 --allow-empty -m 'gHA build: ${{github.run_number}}' || echo "No changes to commit"
+          git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
       #- name: Commit files
       #  run: |
       #    git config --local user.email ly_ding@126.com
        #   git config --local user.name Otoliths
        #   git add .
        #   git commit -m "update" -a
-      - name: 'Push changes'
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: 'Create a Release'
-        uses: elgohr/Github-Release-Action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      #- name: 'Push changes'
+      #  uses: ad-m/github-push-action@master
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
+      #- name: 'Create a Release'
+      #  uses: elgohr/Github-Release-Action@master
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
       #- name: Push to master
         #uses: mikeal/publish-to-github-action@master
         #uses: tcitry/push-to-master@v1.0
