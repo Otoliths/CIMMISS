@@ -2,4 +2,4 @@
 install.packages("curl")
 install.packages("httr")
 install.packages("jsonlite",dependencies = T)
-install.packages("pbmcapplye",dependencies = T)
+install.packages("pbmcapply",dependencies = T)
