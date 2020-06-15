@@ -12,5 +12,6 @@ elements <- "Station_Id_C,Year,Mon,Day,Hour,PRS,PRS_Sea,PRS_Max,PRS_Min,TEM,TEM_
 url <- paste0(baseurl(), "userId=", userId, "&pwd=",pwd,"&dataFormat=json&interfaceId=getSurfEleByTimeRangeAndStaID&dataCode=SURF_CHN_MUL_HOR&timeRange=",
             timeRange,"&staIDs=",staIDs,"&elements=",elements)
 db <- jsonlite::fromJSON(url, flatten=TRUE)
+dir.create("data")
 path <- paste0("data/",gsub("-","",as.Date(Sys.Date())),".rds")
 saveRDS(db,path)
