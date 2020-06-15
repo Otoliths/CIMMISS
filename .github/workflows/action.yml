@@ -16,16 +16,17 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: install dependencies
         run: sudo apt-get install libcurl4-openssl-dev
-      - name: 'Get CIMMISS'
-        run: Rscript -e 'source("code.R")'
-
-      - name: Push to master
+      #- name: 'Get CIMMISS'
+      #  run: Rscript -e 'source("code.R")'
+      - name: 'Working'
+        run: bash ./main.sh
+      #- name: Push to master
         #uses: mikeal/publish-to-github-action@master
-        uses: tcitry/push-to-master@v1.0
-        env:
-          TOKEN: ${{secrets.FISHERIES_AND_FISH}}
-        with:
-          GITHUB_TOKEN: ${{secrets.FISHERIES_AND_FISH}}
+        #uses: tcitry/push-to-master@v1.0
+        #env:
+          #TOKEN: ${{secrets.FISHERIES_AND_FISH}}
+        #with:
+          #GITHUB_TOKEN: ${{secrets.FISHERIES_AND_FISH}}
         #6e76868be6e92a8b2e79e3591856680ac076f497
         
         #with:
