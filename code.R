@@ -1,6 +1,7 @@
 write.table(cars, "data/data.csv", append = T, row.names = F, sep=";", col.names = F)
 install.packages("curl")
 install.packages("httr")
+install.packages("readr")
 install.packages("jsonlite",dependencies=TRUE)
 baseurl <- function()"http://api.data.cma.cn:8090/api?"
 userId <- "5921014329184DMzs"
@@ -14,6 +15,6 @@ url = paste(baseurl(), "userId=", userId, "&pwd=",pwd,"&dataFormat=json&interfac
             timeRange,"&staIDs=",staIDs,"&elements=",elements,sep = "")
 db <- jsonlite::fromJSON(url, flatten=TRUE)
 if(db$returnMessage == "Query Succeed"){
-            path <- paste0("data/",Sys.Date(),".rds")
-            saveRDS(db,path)
+            path <- paste0("data/",gsub("-","",as.Date(Sys.Date())),".rds")
+            readr::write_rds(db,path)
 }
