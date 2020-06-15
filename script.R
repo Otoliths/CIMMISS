@@ -20,24 +20,12 @@ get <- function(i){
   if(db$returnMessage == "Query Succeed"){
     dir.create(paste0("data/",Sys.Date()-2))
     path <- paste0("data/",Sys.Date()-2,"/",ids$区站号[i],"-",ids$省份[i],"-",ids$站名[i],".rds")
-    readr::write_rds(db,"rr.rds")
+    saveRDS(db,path)
     cat(length(list.files(paste0("data/",Sys.Date()-2,"/"), full.names = TRUE)))
   }
 }
 pbmcapply::pbmclapply(1:132,get,mc.cores = 2)
-# sink(paste0(Sys.Date()-2,".text"))
-# cat(sprintf("last Update: %s",Sys.time()),sep = "\n")
-# cat(length(list.files(paste0("data/",Sys.Date()-2,"/"), full.names = TRUE)))
-# sink()
-
-# i=1  # 指定初始行号！
-# while(i <= length(China_SURF_Station$区站号)) {
-#   dir.create(paste0("data/",as.character(China_SURF_Station$区站号[i])))
-#   i=i+1
-# }
-
-
-
-
-
-
+sink(paste0(Sys.Date()-2,".text"))
+cat(sprintf("last Update: %s",Sys.time()),sep = "\n")
+cat(length(list.files(paste0("data/",Sys.Date()-2,"/"), full.names = TRUE)))
+sink()
