@@ -19,7 +19,9 @@ jobs:
       #- name: 'Get CIMMISS'
       #  run: Rscript -e 'source("code.R")'
       - name: 'Working'
-        run: bash ./main.sh
+        run: |
+          cd data
+          bash ./main.sh
       - name: Commit files
         run: |
           git config --local user.email "ly_ding@126.com"
