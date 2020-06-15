@@ -1,4 +1,3 @@
-write.table(cars, "data/data.csv", append = T, row.names = F, sep=";", col.names = F)
 install.packages("curl")
 install.packages("httr")
 install.packages("readr")
