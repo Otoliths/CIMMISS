@@ -1,56 +1,26 @@
-name: test
+name: get CIMMISS
 
 on:
-  push:
-    branches:
-    - master
-  #schedule:
-  #  - cron: "* * 1 * *"
+  schedule:
+    - cron: "0 10 * * *"
 
 jobs:
-  bot:
+  run-R-script:
     runs-on: ubuntu-latest
     steps:
-      - name: 'Checkout codes'
+      - name: Checkout
         uses: actions/checkout@v1
       - uses: r-lib/actions/setup-r@master
       - name: install dependencies
         run: sudo apt-get install libcurl4-openssl-dev
-      #- name: 'Get CIMMISS'
-      #  run: Rscript -e 'source("code.R")'
-      - name: 'Working'
-        run: bash ./main.sh
-      - name: Commit results
+      - name: Install packages
+        run: Rscript install.R
+      - name: Run R script
+        run: Rscript script.R
+      - name: push the result to GitHub
         run: |
           git config --local user.email ly_ding@126.com
           git config --local user.name Otoliths
           git add data
           git commit data --allow-empty -m 'gHA build: ${{github.run_number}}' || echo "No changes to commit"
           git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
-      #- name: Commit files
-      #  run: |
-      #    git config --local user.email ly_ding@126.com
-       #   git config --local user.name Otoliths
-       #   git add .
-       # #  git add **.rds
-       #   git commit -m "update" -a
-      #- name: 'Push changes'
-      #  uses: ad-m/github-push-action@master
-      #  with:
-      #    github_token: ${{ secrets.GITHUB_TOKEN }}
-      #- name: 'Create a Release'
-      #  uses: elgohr/Github-Release-Action@master
-      #  with:
-      #    github_token: ${{ secrets.GITHUB_TOKEN }}
-      #- name: Push to master
-        #uses: mikeal/publish-to-github-action@master
-        #uses: tcitry/push-to-master@v1.0
-        #env:
-          #TOKEN: ${{secrets.FISHERIES_AND_FISH}}
-        #with:
-          #GITHUB_TOKEN: ${{secrets.FISHERIES_AND_FISH}}
-        #6e76868be6e92a8b2e79e3591856680ac076f497
-        
-        #with:
-         #entrypoint: 'source("code.R")'
-         #args: "data"
