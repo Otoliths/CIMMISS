@@ -24,7 +24,6 @@ get <- function(i){
     cat(length(list.files(paste0("data/",Sys.Date()-2,"/"), full.names = TRUE)))
   }
 }
-cat(sprintf("last Update: %s",Sys.time()),sep = "\n")
 pbmcapply::pbmclapply(1:132,get,mc.cores = 2)
 cat(length(list.files(paste0("data/",Sys.Date()-2,"/"), full.names = TRUE)))
 
