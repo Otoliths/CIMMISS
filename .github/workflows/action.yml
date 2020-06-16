@@ -2,7 +2,7 @@ name: get CIMMISS
 
 on:
   schedule:
-    - cron: "0 4 * * *"
+    - cron: "0 22 * * *"
 
 jobs:
   run-R-script:
