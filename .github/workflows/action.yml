@@ -19,7 +19,6 @@ jobs:
       - name: Install packages
         run: Rscript install.R
       - name: Run R script
-        timeout-minutes: 60
         run: Rscript script.R
       - name: push the result to GitHub
         run: |
