@@ -49,7 +49,8 @@ get_occ <- function(sp,dbsource,limit,month,mc.cores,group){
       spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit), what = "data")
     })
   }
-  dat <- rlist::list.stack(dat)
+  #dat <- rlist::list.stack(dat)
+  dat <- dplyr::bind_rows(dat)
   dat$group <- rep(group,dim(dat)[1])
   return(dat)
 }
@@ -69,7 +70,7 @@ sp4 = c('Anguilla bicolor',
         'Anguilla australis australis',
         'Anguilla australis schmidtii','Anguilla australis schmidti')
 
-group4 <- get_occ(sp = sp4,dbsource = "gbif",mc.cores = 4,limit = 60000,group = 3) 
+group4 <- get_occ(sp = sp4,dbsource = "gbif",mc.cores = 4,limit = 60000,group = 4) 
 group4 <- group4 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
 group4 <- unique(group4)
 group4 <- group4[-grep("BOLD",group4$name),]
