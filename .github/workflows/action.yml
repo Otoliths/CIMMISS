@@ -1,13 +1,13 @@
 name: get CIMMISS
 
 on:
-  #push:
-  #    branches: [ master ]
+  push:
+      branches: [ master ]
   #schedule:
   #  - cron: "0 2 * * *"
 
 jobs:
-  run-R-script:
+  group1:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,7 +18,64 @@ jobs:
       - name: Install packages
         run: Rscript install.R
       - name: Run R script
-        run: Rscript script.R
+        run: Rscript script1.R
+      - name: push the result to GitHub
+        run: |
+          git config --local user.email ly_ding@126.com
+          git config --local user.name Otoliths
+          git add Anguilla_genus
+          git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
+          git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
+group2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - uses: r-lib/actions/setup-r@master
+      - name: install dependencies
+        run: sudo apt-get install libcurl4-openssl-dev libgeos-dev libudunits2-dev
+      - name: Install packages
+        run: Rscript install.R
+      - name: Run R script
+        run: Rscript script2.R
+      - name: push the result to GitHub
+        run: |
+          git config --local user.email ly_ding@126.com
+          git config --local user.name Otoliths
+          git add Anguilla_genus
+          git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
+          git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
+group3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - uses: r-lib/actions/setup-r@master
+      - name: install dependencies
+        run: sudo apt-get install libcurl4-openssl-dev libgeos-dev libudunits2-dev
+      - name: Install packages
+        run: Rscript install.R
+      - name: Run R script
+        run: Rscript script3.R
+      - name: push the result to GitHub
+        run: |
+          git config --local user.email ly_ding@126.com
+          git config --local user.name Otoliths
+          git add Anguilla_genus
+          git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
+          git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
+group4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - uses: r-lib/actions/setup-r@master
+      - name: install dependencies
+        run: sudo apt-get install libcurl4-openssl-dev libgeos-dev libudunits2-dev
+      - name: Install packages
+        run: Rscript install.R
+      - name: Run R script
+        run: Rscript script4.R
       - name: push the result to GitHub
         run: |
           git config --local user.email ly_ding@126.com
