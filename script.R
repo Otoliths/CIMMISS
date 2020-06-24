@@ -66,7 +66,8 @@ sp1 = c('Anguilla celebesensis','Anguilla celebensis','Anguilla ancestralis','An
        'Anguilla megastoma',
        'Anguilla luzonensis','Anguilla huangi')
 group1 <- get_occ(sp = sp1,dbsource = "gbif",mc.cores = 4,limit = 60000,group = 1) 
-group1 <- group1 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely() %>% dedup()
+group1 <- group1 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+group1 <- unique(group1)
 group1 <- group1[-grep("BOLD",group1$name),]
 saveRDS(group1,"Anguilla_genus/group1.rds")
 
@@ -81,7 +82,9 @@ sp2 = c('Anguilla bengalensis',
         'Anguilla marmorata',
         'Anguilla reinhardtii','Anguilla reinhardti')
 group2 <- get_occ(sp = sp2,dbsource = "gbif",mc.cores = 4,limit = 60000,group = 2) 
-
+group2 <- group2 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+group2 <- unique(group2)
+group2 <- group2[-grep("BOLD",group2$name),]
 saveRDS(group2,"Anguilla_genus/group2.rds")
 
 #************************************************************************
