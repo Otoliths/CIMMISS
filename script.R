@@ -53,11 +53,19 @@ get_occ <- function(sp,dbsource,limit,month,mc.cores,group){
   dat$group <- rep(group,dim(dat)[1])
   return(dat)
 }
+if (!file.exists("Anguilla_genus")){
+    dir.create("Anguilla_genus")
+  }
+
+#************************************************************************
+#*********************************group3*********************************
+#************************************************************************
 
 sp1 = c('Anguilla celebesensis','Anguilla celebensis','Anguilla ancestralis','Anguilla amboinensis',
        'Anguilla interioris',
        'Anguilla megastoma',
        'Anguilla luzonensis','Anguilla huangi')
 group1 <- get_occ(sp = sp1,dbsource = "gbif",mc.cores = 4,limit = 60000,group = 1) 
-
-saveRDS(group1,"data/group1.rds")
+group1 <- group1 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely() %>% dedup()
+group1 <- group1[-grep("BOLD",group1$name),]
+saveRDS(group1,"Anguilla_genus/group1.rds")
