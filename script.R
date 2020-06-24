@@ -96,7 +96,8 @@ group3_1 <- unique(group3_1)
 group3_1 <- group3_1[-grep("BOLD",group3_1$name),]
 
 df1 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 1,group = 3) 
-df1 <- df1 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely() %>% dedup()
+df1 <- df1 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+df1 <- unique(df1)
 
 df2 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 2,group = 3)
 df2 <- df2 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
