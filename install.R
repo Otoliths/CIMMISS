@@ -1,5 +1,9 @@
 ## Add R packages to install
-install.packages("curl")
-install.packages("httr")
-install.packages("jsonlite",dependencies = T)
+#install.packages("curl")
+#install.packages("httr")
+#install.packages("jsonlite",dependencies = T)
 install.packages("pbmcapply",dependencies = T)
+install.packages("spocc",dependencies = T)
+install.packages("rlist",dependencies = T)
+install.packages("scrubr",dependencies = T)
+install.packages("magrittr",dependencies = T)
