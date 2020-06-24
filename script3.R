@@ -57,35 +57,6 @@ if (!file.exists("Anguilla_genus")){
     dir.create("Anguilla_genus")
   }
 
-#************************************************************************
-#*********************************group3*********************************
-#************************************************************************
-
-sp1 = c('Anguilla celebesensis','Anguilla celebensis','Anguilla ancestralis','Anguilla amboinensis',
-       'Anguilla interioris',
-       'Anguilla megastoma',
-       'Anguilla luzonensis','Anguilla huangi')
-group1 <- get_occ(sp = sp1,dbsource = "gbif",mc.cores = 4,limit = 60000,group = 1) 
-group1 <- group1 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-group1 <- unique(group1)
-group1 <- group1[-grep("BOLD",group1$name),]
-saveRDS(group1,"Anguilla_genus/group1.rds")
-
-
-#************************************************************************
-#*********************************group2*********************************
-#************************************************************************
-
-sp2 = c('Anguilla bengalensis',
-        'Anguilla bengalensis bengalensis',
-        'Anguilla bengalensis labiata','Anguilla labiata',
-        'Anguilla marmorata',
-        'Anguilla reinhardtii','Anguilla reinhardti')
-group2 <- get_occ(sp = sp2,dbsource = "gbif",mc.cores = 4,limit = 60000,group = 2) 
-group2 <- group2 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-group2 <- unique(group2)
-group2 <- group2[-grep("BOLD",group2$name),]
-saveRDS(group2,"Anguilla_genus/group2.rds")
 
 #************************************************************************
 #*********************************group3*********************************
@@ -150,21 +121,3 @@ df_list <- list(group3_1,df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12)
 group3 <- Reduce(function(x,y) merge(x,y,all=T),df_list)
 
 saveRDS(group3,"Anguilla_genus/group3.rds")
-
-#************************************************************************
-#*********************************group4*********************************
-#************************************************************************
-
-sp4 = c('Anguilla bicolor',
-        'Anguilla bicolor bicolor',
-        'Anguilla bicolor pacifica',
-        'Anguilla obscura',
-        'Anguilla australis',
-        'Anguilla australis australis',
-        'Anguilla australis schmidtii','Anguilla australis schmidti')
-
-group4 <- get_occ(sp = sp4,dbsource = "gbif",mc.cores = 4,limit = 60000,group = 3) 
-group4 <- group4 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-group4 <- unique(group4)
-group4 <- group4[-grep("BOLD",group4$name),]
-saveRDS(group4,"Anguilla_genus/group4.rds")
