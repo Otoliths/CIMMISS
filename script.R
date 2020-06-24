@@ -37,7 +37,7 @@ lapply(need.packs, require, character.only = TRUE)
 
 #------------------------Custom get_occ function-------------
 get_occ <- function(sp,dbsource,limit,month,mc.cores,group){
-  if(occ(query = sp, from = dbsource)$gbif$meta$found > 20000){
+  if(sp %in% 'Anguilla anguilla'){
     #month <- match.arg(month, choices = as.character(1:12))
     print(spocc::occ(query = sp, from = dbsource,limit = limit, gbifopts = list(month = month)))
     dat <- pbmcapply::pbmclapply(sp,mc.cores = mc.cores,function(query){
