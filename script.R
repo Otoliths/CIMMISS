@@ -44,7 +44,7 @@ get_occ <- function(sp,dbsource,limit,month,mc.cores,group){
         spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit, gbifopts = list(month = month)), what = "data")
       })
   }else{
-    print(spocc::occ(query = sp, from = dbsource))
+    print(spocc::occ(query = sp, from = dbsource,limit = limit))
     dat <- pbmcapply::pbmclapply(sp,mc.cores = mc.cores,function(query){
       spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit), what = "data")
     })
