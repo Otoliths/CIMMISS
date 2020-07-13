@@ -28,7 +28,7 @@
 # cat(length(list.files(paste0("data/",Sys.Date()-2,"/"), full.names = TRUE)))
 
 #rm(list = ls())
-need.packs <- c("spocc","pbmcapply","rlist","scrubr","magrittr")
+need.packs <- c("spocc","pbmcapply","rlist","scrubr","magrittr","dplyr")
 #-----------------------START-------------------------------
 #--------------Packages you want to install-----------------------
 has <- need.packs %in% row.names(installed.packages())
@@ -41,15 +41,18 @@ get_occ <- function(sp,dbsource,limit,month,mc.cores,group){
     #month <- match.arg(month, choices = as.character(1:12))
     print(spocc::occ(query = sp, from = dbsource,limit = limit, gbifopts = list(month = month)))
     dat <- pbmcapply::pbmclapply(sp,mc.cores = mc.cores,function(query){
-        spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit, gbifopts = list(month = month)), what = "data")
+        spocc::occ(query = query, from = dbsource, limit = limit, gbifopts = list(month = month))$data
+        #spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit, gbifopts = list(month = month)), what = "data")
       })
   }else{
     print(spocc::occ(query = sp, from = dbsource,limit = limit))
     dat <- pbmcapply::pbmclapply(sp,mc.cores = mc.cores,function(query){
-      spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit), what = "data")
+      spocc::occ(query = query, from = dbsource, limit = limit)$data
+      #spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit), what = "data")
     })
   }
-  dat <- rlist::list.stack(dat)
+  #dat <- rlist::list.stack(dat)
+  dat <- dplyr::bind_rows(dat)
   dat$group <- rep(group,dim(dat)[1])
   return(dat)
 }
