@@ -28,7 +28,7 @@
 # cat(length(list.files(paste0("data/",Sys.Date()-2,"/"), full.names = TRUE)))
 
 #rm(list = ls())
-need.packs <- c("spocc","pbmcapply","rlist","scrubr","magrittr")
+need.packs <- c("spocc","dplyr")
 #-----------------------START-------------------------------
 #--------------Packages you want to install-----------------------
 has <- need.packs %in% row.names(installed.packages())
@@ -36,23 +36,24 @@ if(any(!has))install.packages(need.packs[!has], repos = '')
 lapply(need.packs, require, character.only = TRUE)
 
 #------------------------Custom get_occ function-------------
-get_occ <- function(sp,dbsource,limit,month,mc.cores,group){
-  if(length(sp) == 1){
+get_occ <- function(sp,dbsource,limit,month,group){
+  if(length(sp)==1){
     #month <- match.arg(month, choices = as.character(1:12))
-    print(spocc::occ(query = sp, from = dbsource,limit = limit, gbifopts = list(month = month)))
-    dat <- pbmcapply::pbmclapply(sp,mc.cores = mc.cores,function(query){
-        spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit, gbifopts = list(month = month)), what = "data")
-      })
+    dat <- spocc::occ(query = sp, from = dbsource, limit = limit, gbifopts = list(month = month))
+    dat <- dat$gbif$data
+      #spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit, gbifopts = list(month = month)), what = "data")
   }else{
-    print(spocc::occ(query = sp, from = dbsource,limit = limit))
-    dat <- pbmcapply::pbmclapply(sp,mc.cores = mc.cores,function(query){
-      spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit), what = "data")
-    })
+    dat <- spocc::occ(query = sp, from = dbsource, limit = limit)
+    dat <- dat$gbif$data
+      #spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit), what = "data")
+    
   }
-  dat <- rlist::list.stack(dat)
+  #dat <- rlist::list.stack(dat)
+  dat <- dplyr::bind_rows(dat[1])
   dat$group <- rep(group,dim(dat)[1])
   return(dat)
 }
+
 if (!file.exists("Anguilla_genus")){
     dir.create("Anguilla_genus")
   }
@@ -64,58 +65,58 @@ if (!file.exists("Anguilla_genus")){
 sp3 = c('Anguilla borneensis',
         'Anguilla japonica',
         'Anguilla rostrata')
-group3_1 <- get_occ(sp = sp3,dbsource = "gbif",mc.cores = 4,limit = 60000,group = 3) 
-group3_1 <- group3_1 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-group3_1 <- unique(group3_1)
-group3_1 <- group3_1[-grep("BOLD",group3_1$name),]
+group3_1 <- get_occ(sp = sp3,dbsource = "gbif",limit = 60000,group = 3) 
+#group3_1 <- group3_1 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#group3_1 <- unique(group3_1)
+#group3_1 <- group3_1[-grep("BOLD",group3_1$name),]
 
-df1 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 1,group = 3) 
-df1 <- df1 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df1 <- unique(df1)
+df1 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 1,group = 3) 
+#df1 <- df1 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df1 <- unique(df1)
 
-df2 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 2,group = 3)
-df2 <- df2 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df2 <- unique(df2)
+df2 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 2,group = 3)
+#df2 <- df2 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df2 <- unique(df2)
 
-df3 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 3,group = 3)
-df3 <- df3 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df3 <- unique(df3)
+df3 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 3,group = 3)
+#df3 <- df3 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df3 <- unique(df3)
 
-df4 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 4,group = 3) 
-df4 <- df4 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df4 <- unique(df4)
+df4 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 4,group = 3) 
+#df4 <- df4 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df4 <- unique(df4)
 
-df5 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 5,group = 3) 
-df5 <- df5 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df5 <- unique(df5)
+df5 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 5,group = 3) 
+#df5 <- df5 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df5 <- unique(df5)
 
-df6 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 6,group = 3) 
-df6 <- df6 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df6 <- unique(df6)
+df6 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 6,group = 3) 
+#df6 <- df6 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df6 <- unique(df6)
 
-df7 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 7,group = 3) 
-df7 <- df7 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df7 <- unique(df7)
+df7 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 7,group = 3) 
+#df7 <- df7 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df7 <- unique(df7)
 
-df8 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 8,group = 3) 
-df8 <- df7 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df8 <- unique(df8)
+df8 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 8,group = 3) 
+#df8 <- df7 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df8 <- unique(df8)
 
-df9 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 9,group = 3)
-df9 <- df9 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df9 <- unique(df9)
+df9 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 9,group = 3)
+#df9 <- df9 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df9 <- unique(df9)
 
-df10 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 10,group = 3) 
-df10 <- df10 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df10 <- unique(df10)
+df10 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 10,group = 3) 
+#df10 <- df10 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df10 <- unique(df10)
 
-df11 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 11,group = 3) 
-df11 <- df11 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df11 <- unique(df11)
+df11 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 11,group = 3) 
+#df11 <- df11 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df11 <- unique(df11)
 
-df12 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",mc.cores = 4,limit = 60000,month = 12,group = 3) 
-df12 <- df12 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-df12 <- unique(df12)
+df12 <- get_occ(sp = 'Anguilla anguilla',dbsource = "gbif",limit = 60000,month = 12,group = 3) 
+#df12 <- df12 %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#df12 <- unique(df12)
 
 df_list <- list(group3_1,df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12)
 group3 <- Reduce(function(x,y) merge(x,y,all=T),df_list)
