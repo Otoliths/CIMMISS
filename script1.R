@@ -57,7 +57,7 @@
 #   return(dat)
 # }
 #------------------------------
-need.packs <- c("spocc","pbmcapply","dplyr","scrubr","magrittr")
+need.packs <- c("spocc","dplyr")
 #-----------------------START-------------------------------
 #--------------Packages you want to install-----------------------
 has <- need.packs %in% row.names(installed.packages())
