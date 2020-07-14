@@ -28,7 +28,7 @@
 # cat(length(list.files(paste0("data/",Sys.Date()-2,"/"), full.names = TRUE)))
 
 #rm(list = ls())
-need.packs <- c("spocc","pbmcapply","rlist","scrubr","magrittr")
+need.packs <- c("spocc","dplyr")
 #-----------------------START-------------------------------
 #--------------Packages you want to install-----------------------
 has <- need.packs %in% row.names(installed.packages())
@@ -36,23 +36,24 @@ if(any(!has))install.packages(need.packs[!has], repos = '')
 lapply(need.packs, require, character.only = TRUE)
 
 #------------------------Custom get_occ function-------------
-get_occ <- function(sp,dbsource,limit,month,mc.cores,group){
-  if(length(sp) == 1){
+get_occ <- function(sp,dbsource,limit,month,group){
+  if(length(sp)==1){
     #month <- match.arg(month, choices = as.character(1:12))
-    print(spocc::occ(query = sp, from = dbsource,limit = limit, gbifopts = list(month = month)))
-    dat <- pbmcapply::pbmclapply(sp,mc.cores = mc.cores,function(query){
-        spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit, gbifopts = list(month = month)), what = "data")
-      })
+    dat <- spocc::occ(query = sp, from = dbsource, limit = limit, gbifopts = list(month = month))
+    dat <- dat$gbif$data
+      #spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit, gbifopts = list(month = month)), what = "data")
   }else{
-    print(spocc::occ(query = sp, from = dbsource,limit = limit))
-    dat <- pbmcapply::pbmclapply(sp,mc.cores = mc.cores,function(query){
-      spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit), what = "data")
-    })
+    dat <- spocc::occ(query = sp, from = dbsource, limit = limit)
+    dat <- dat$gbif$data
+      #spocc::occ2df(spocc::occ(query = query, from = dbsource, limit = limit), what = "data")
+    
   }
-  dat <- rlist::list.stack(dat)
+  #dat <- rlist::list.stack(dat)
+  dat <- dplyr::bind_rows(dat[1])
   dat$group <- rep(group,dim(dat)[1])
   return(dat)
 }
+
 if (!file.exists("Anguilla_genus")){
     dir.create("Anguilla_genus")
   }
@@ -66,8 +67,8 @@ sp2 = c('Anguilla bengalensis',
         'Anguilla bengalensis labiata','Anguilla labiata',
         'Anguilla marmorata',
         'Anguilla reinhardtii','Anguilla reinhardti')
-group2 <- get_occ(sp = sp2,dbsource = "gbif",mc.cores = 4,limit = 60000,group = 2) 
-group2 <- group2 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
-group2 <- unique(group2)
-group2 <- group2[-grep("BOLD",group2$name),]
+group2 <- get_occ(sp = sp2,dbsource = "gbif",limit = 60000,group = 2) 
+#group2 <- group2 %>% date_missing() %>% coord_impossible() %>% coord_incomplete() %>% coord_unlikely()
+#group2 <- unique(group2)
+#group2 <- group2[-grep("BOLD",group2$name),]
 saveRDS(group2,"Anguilla_genus/group2.rds")
