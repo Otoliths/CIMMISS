@@ -2,10 +2,10 @@ name: get ynswj
 
 on:
   schedule:
-    - cron: "10 4 * * *"
+    - cron: "20 4 * * *"
 
 jobs:
-  Anguilla_genus:
+  ynswj:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
