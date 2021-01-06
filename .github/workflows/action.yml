@@ -1,8 +1,8 @@
-name: get Anguilla_genus
+name: get ynswj
 
 on:
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "10 4 * * *"
 
 jobs:
   Anguilla_genus:
@@ -16,42 +16,42 @@ jobs:
       - name: Install packages
         run: Rscript install.R
         
-      - name: group1
-        run: Rscript script1.R
+      - name: water
+        run: Rscript code.R
       - name: push the result to GitHub
         run: |
           git config --local user.email ly_ding@126.com
           git config --local user.name Otoliths
-          git add Anguilla_genus
-          git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
+          git add water
+          git commit water --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
           git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
       
-      - name: group2
-        run: Rscript script2.R
+      - name: rain
+        run: Rscript code.R
       - name: push the result to GitHub
         run: |
           git config --local user.email ly_ding@126.com
           git config --local user.name Otoliths
-          git add Anguilla_genus
-          git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
+          git add rain
+          git commit rain --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
           git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
       
-      - name: group3
-        run: Rscript script3.R
-      - name: push the result to GitHub
-        run: |
-          git config --local user.email ly_ding@126.com
-          git config --local user.name Otoliths
-          git add Anguilla_genus
-          git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
-          git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
-
-      - name: group4
-        run: Rscript script4.R
-      - name: push the result to GitHub
-        run: |
-          git config --local user.email ly_ding@126.com
-          git config --local user.name Otoliths
-          git add Anguilla_genus
-          git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
-          git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
+     # - name: group3
+# run: Rscript script3.R
+# - name: push the result to GitHub
+# run: |
+#   git config --local user.email ly_ding@126.com
+# git config --local user.name Otoliths
+# git add Anguilla_genus
+# git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
+# git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
+# 
+# - name: group4
+# run: Rscript script4.R
+# - name: push the result to GitHub
+# run: |
+#   git config --local user.email ly_ding@126.com
+# git config --local user.name Otoliths
+# git add Anguilla_genus
+# git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
+# git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
