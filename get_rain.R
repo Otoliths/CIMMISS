@@ -19,12 +19,9 @@ get_data <- function(par,date){
   return(x)
 }
 
-if (!file.exists("rain")){
-  dir.create("rain")
+if (!file.exists(paste0("rain/",Sys.Date()))){
+  dir.create(paste0("rain/",Sys.Date()))
 }
-
 rain <- get_data(par = "rain",date = Sys.Date())
-saveRDS(rain,paste0("rain/",Sys.time(),".rds"))
-
-
-
+path <- paste0("rain/",Sys.Date(),"/",Sys.time(),".rds")
+saveRDS(rain,path)
