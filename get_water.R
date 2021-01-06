@@ -19,12 +19,9 @@ get_data <- function(par,date){
   return(x)
 }
 
-if (!file.exists("water")){
-  dir.create("water")
+if (!file.exists(paste0("water/",Sys.Date()))){
+  dir.create(paste0("water/",Sys.Date()))
 }
-
 water <- get_data(par = "water",date = Sys.Date())
-saveRDS(water,paste0("water/",Sys.time(),".rds"))
-
-
-
+path <- paste0("water/",Sys.Date(),"/",Sys.time(),".rds")
+saveRDS(water,path)
