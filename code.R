@@ -24,6 +24,7 @@ get_data <- function(par,date,output){
             cat(Sys.time()," is OK !")
           }
   )
+  return(x)
   saveRDS(x,paste0(output,Sys.time(),".rds"))
 }
 
