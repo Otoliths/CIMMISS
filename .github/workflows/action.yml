@@ -17,7 +17,7 @@ jobs:
         run: Rscript install.R
         
       - name: water
-        run: Rscript code.R
+        run: Rscript get_water.R
       - name: push the result to GitHub
         run: |
           git config --local user.email ly_ding@126.com
@@ -27,7 +27,7 @@ jobs:
           git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
       
       - name: rain
-        run: Rscript code.R
+        run: Rscript get_rain.R
       - name: push the result to GitHub
         run: |
           git config --local user.email ly_ding@126.com
@@ -35,23 +35,3 @@ jobs:
           git add rain
           git commit rain --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
           git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
-      
-     # - name: group3
-# run: Rscript script3.R
-# - name: push the result to GitHub
-# run: |
-#   git config --local user.email ly_ding@126.com
-# git config --local user.name Otoliths
-# git add Anguilla_genus
-# git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
-# git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
-# 
-# - name: group4
-# run: Rscript script4.R
-# - name: push the result to GitHub
-# run: |
-#   git config --local user.email ly_ding@126.com
-# git config --local user.name Otoliths
-# git add Anguilla_genus
-# git commit Anguilla_genus --allow-empty -m 'add CIMMISS: ${{github.run_number}}' || echo "No changes to commit"
-# git push https://${{github.actor}}:${{secrets.token}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
