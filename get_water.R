@@ -19,8 +19,8 @@
    return(x)
  }
 
- if (!file.exists(paste0("rain/",as.POSIXlt(Sys.Date(), "Asia/Shanghai")))){
-   dir.create(paste0("rain/",as.POSIXlt(Sys.Date(), "Asia/Shanghai")))
+ if (!file.exists(paste0("water/",as.POSIXlt(Sys.Date(), "Asia/Shanghai")))){
+   dir.create(paste0("water/",as.POSIXlt(Sys.Date(), "Asia/Shanghai")))
  }
  water <- get_data(par = "water",date = as.POSIXlt(Sys.Date(), "Asia/Shanghai"))
  path <- paste0("water/",as.POSIXlt(Sys.Date(), "Asia/Shanghai"),"/",as.POSIXlt(Sys.time(), "Asia/Shanghai"),".rds")
