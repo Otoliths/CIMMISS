@@ -27,20 +27,20 @@
 # saveRDS(rain,path)
 
 
-get_water <- function(date){
+get_rain <- function(date){
   seq <- strptime(paste0(as.Date(date)-1," 23:30:00"),"%Y-%m-%d %H:%M:%S")+3600*0:24
   seq <- gsub(" ","T",seq)
   x <- lapply(1:24, function(i){
-    url <- paste0("http://www.ynswj.cn/webapi/api/v1/water?extra=area&itm=1&area_code=530000&no_data_visible=false&time=[",seq[i],",",seq[i+1],"]")
+    url <- paste0("http://www.ynswj.cn/webapi/api/v1/rain?extra=area&itm=1&area_code=530000&no_data_visible=false&time=[",seq[i],",",seq[i+1],"]")
     d1 <- jsonlite::fromJSON(url)
   })
   return(x)
 }
 
-if (!file.exists("water")){
-  dir.create("water")
+if (!file.exists("rain")){
+  dir.create("rain")
 }
 
-water <- get_water(date = Sys.Date()-1)
-path <- paste0("water/",Sys.Date()-1,".rds")
-saveRDS(water,path)
+rain <- get_rain(date = Sys.Date()-1)
+path <- paste0("rain/",Sys.Date()-1,".rds")
+saveRDS(rain,path)
