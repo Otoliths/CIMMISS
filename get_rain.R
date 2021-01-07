@@ -41,6 +41,7 @@ if (!file.exists("rain")){
   dir.create("rain")
 }
 
-rain <- get_rain(date = Sys.Date()-1)
-path <- paste0("rain/",Sys.Date()-1,".rds")
+rain <- get_rain(date = as.POSIXlt(Sys.Date()-1, "Asia/Shanghai"))
+path <- paste0("rain/",as.POSIXlt(Sys.Date()-1, "Asia/Shanghai"),".rds")
 saveRDS(rain,path)
+
