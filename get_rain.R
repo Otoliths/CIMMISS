@@ -7,21 +7,21 @@ get_data <- function(par,date){
             url = paste0(web,"/water?")
             x <- jsonlite::fromJSON(url,flatten=TRUE)
             x <- x[["data"]]
-            cat(Sys.time()," is OK !")
+            print(paste0(as.POSIXlt(Sys.time(), "Asia/Shanghai")," is OK !"))
           },
           rain = {
             url = paste0(web,"/rain?")
             x <- jsonlite::fromJSON(url,flatten=TRUE)
             x <- x[["data"]]
-            cat(Sys.time()," is OK !")
+            print(paste0(as.POSIXlt(Sys.time(), "Asia/Shanghai")," is OK !"))
           }
   )
   return(x)
 }
 
-if (!file.exists(paste0("rain/",Sys.Date()))){
-  dir.create(paste0("rain/",Sys.Date()))
+if (!file.exists(paste0("rain/",as.POSIXlt(Sys.Date(), "Asia/Shanghai")))){
+  dir.create(paste0("rain/",as.POSIXlt(Sys.Date(), "Asia/Shanghai")))
 }
-rain <- get_data(par = "rain",date = Sys.Date())
-path <- paste0("rain/",Sys.Date(),"/",as.POSIXlt(Sys.time(), "Asia/Shanghai"),".rds")
+rain <- get_data(par = "rain",date = as.POSIXlt(Sys.Date(), "Asia/Shanghai"))
+path <- paste0("rain/",as.POSIXlt(Sys.Date(), "Asia/Shanghai"),"/",as.POSIXlt(Sys.time(), "Asia/Shanghai"),".rds")
 saveRDS(rain,path)
