@@ -23,5 +23,5 @@ if (!file.exists(paste0("water/",Sys.Date()))){
   dir.create(paste0("water/",Sys.Date()))
 }
 water <- get_data(par = "water",date = Sys.Date())
-path <- paste0("water/",Sys.Date(),"/",Sys.time(),".rds")
+path <- paste0("water/",Sys.Date(),"/",as.POSIXlt(Sys.time(), "Asia/Shanghai"),".rds")
 saveRDS(water,path)
