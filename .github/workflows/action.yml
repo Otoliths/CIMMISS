@@ -2,7 +2,7 @@ name: get ynswj
 
 on:
   schedule:
-    - cron: "0 0/1 * * *"
+    - cron: "40 * * * *"
 
 jobs:
   ynswj:
