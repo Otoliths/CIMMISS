@@ -1,4 +1,7 @@
 #------------------------Custom get_occ function-------------
+if (!requireNamespace("jsonlite", quietly = TRUE))
+  install.packages("jsonlite",dependencies = T)
+
  get_data <- function(par,date){
   par <- match.arg(par, c("water","rain"))
   web <-"http://www.ynswj.cn/webapi/api/v1"
