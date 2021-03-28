@@ -1,8 +1,13 @@
 name: get ynswj
 
 on:
-  schedule:
-    - cron: "10 * * * *"
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  #schedule:
+  #  - cron: "10 * * * *"
 
 jobs:
   ynswj:
@@ -24,10 +29,7 @@ jobs:
           git config --local user.name Otoliths
           git add water
           git commit -am "GH ACTION water $(date)"
-          git push origin main
-        env:
-         REPO_KEY: ${{secrets.TOKEN}}
-         username: github-actions
+          git push https://${{github.actor}}:${{secrets.TOKEN}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
          
       - name: rain
         run: Rscript get_rain.R
