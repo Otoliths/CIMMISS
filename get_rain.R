@@ -31,7 +31,6 @@ if (!requireNamespace("jsonlite", quietly = TRUE))
  path <- paste0("rain/",as.POSIXlt(Sys.Date(), "Asia/Shanghai"),"/",as.POSIXlt(Sys.time(), "Asia/Shanghai"),".rds")
  saveRDS(rain,path)
 
-
 #get_rain <- function(date){
 #  seq <- strptime(paste0(as.Date(date)-1," 23:30:00"),"%Y-%m-%d %H:%M:%S")+3600*0:24
 #  seq <- gsub(" ","T",seq)
