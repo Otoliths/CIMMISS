@@ -29,7 +29,11 @@ jobs:
           git config --local user.name Otoliths
           git add water
           git commit -am "GH ACTION water $(date)"
-          git push https://${{github.actor}}:${{secrets.TOKEN}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
+          git pull origin master
+          git push origin main
+        env:
+         REPO_KEY: ${{secrets.TOKEN}}
+         username: github-actions
          
       - name: rain
         run: Rscript get_rain.R
@@ -39,6 +43,7 @@ jobs:
           git config --local user.name Otoliths
           git add rain
           git commit -am "GH ACTION rain $(date)"
+          git pull origin master
           git push origin main
         env:
          REPO_KEY: ${{secrets.TOKEN}}
