@@ -22,7 +22,7 @@ jobs:
         run: |
           git config --local user.email ly_ding@126.com
           git config --local user.name Otoliths
-          git add water
+          git add water/*
           git commit -am "GH ACTION water $(date)"
           git pull origin master
           git push origin main
@@ -36,7 +36,7 @@ jobs:
         run: |
           git config --local user.email ly_ding@126.com
           git config --local user.name Otoliths
-          git add rain
+          git add rain/*
           git commit -am "GH ACTION rain $(date)"
           git pull origin master
           git push origin main
