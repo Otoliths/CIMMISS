@@ -1,13 +1,8 @@
 name: get ynswj
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  #schedule:
-  #  - cron: "10 * * * *"
+  schedule:
+    - cron: "10 * * * *"
 
 jobs:
   ynswj:
